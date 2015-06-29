@@ -1,13 +1,13 @@
 #!/bin/sh
 
-TOOLCHAIN_PATH="/usr/arm-linux-gnueabi"
-OMX_INSTALL_PATH="/home/kamil/praca/openmax/sprc/dst7"
-OMXCORE_INCLUDE_PATH=$OMX_INSTALL_PATH"/usr/local/include"
+TOOLCHAIN_PATH="/usr"
+OMX_INSTALL_PATH=""
+OMXCORE_INCLUDE_PATH=$OMX_INSTALL_PATH"/usr/include"
 
 
-cflags="-I$OMX_INSTALL_PATH/include -I$TOOLCHAIN_PATH/include \
+cflags="-Wno-error=switch -Wno-error=unused-but-set-variable -I$OMX_INSTALL_PATH/include -I$TOOLCHAIN_PATH/include \
 	-I$OMXCORE_INCLUDE_PATH \
-	-L$OMX_INSTALL_PATH/usr/local/lib"
+	-L$OMX_INSTALL_PATH/usr/lib"
 
 make distclean
 
@@ -15,7 +15,7 @@ autoreconf -i
 
 ac_cv_func_memset_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes  ac_cv_func_malloc_0_nonnull=yes ./configure \
  --host=arm-linux-gnueabi \
- --prefix=/usr/local \
+ --prefix=/usr \
  --enable-shared \
  CFLAGS="$cflags"
 
